@@ -1,5 +1,7 @@
 # NEWS FEED
 
+This project use free api from https://newsapi.org/ 
+
 ## Feature
 - headline default (us)
 - headline select country
@@ -31,7 +33,7 @@ API Doc: https://newsapi.org/docs/endpoints
 - API Key 2 = eda6154a62744b7bbad849130a7f7b6f
 
 ## NOTE:
-- This Free api news for developer accounts are limited to 100 requests over a 24 hour
+- Free api news for developer accounts are limited to 100 requests over a 24 hour
 - Languague use SwiftUI
 
 
