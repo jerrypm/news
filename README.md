@@ -23,10 +23,12 @@
 ~ `https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY`
 - Parameter: `apiKey` = ??
 
+API Doc: https://newsapi.org/docs/endpoints
+
 ## API KEY
 
-API Key 1 = 9f7d91151b7d46d4a3be011aa9878deb
-API Key 2 = eda6154a62744b7bbad849130a7f7b6f
+- API Key 1 = 9f7d91151b7d46d4a3be011aa9878deb
+- API Key 2 = eda6154a62744b7bbad849130a7f7b6f
 
 ## NOTE:
 - This Free api news for developer accounts are limited to 100 requests over a 24 hour
