@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct NewsFeedApp: App {
+    // MARK: - PROPERTY
+    
     
     // MARK: - BODY
     var body: some Scene {

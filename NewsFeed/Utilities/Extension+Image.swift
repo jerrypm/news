@@ -33,9 +33,8 @@ extension Image {
         return Image(systemName: SC.close.value)
     }
     
-    
     // MARK: Asset
     public static var emptyPage: Image {
-        return Image(uiImage: UIImage(named: SC.emptyLight.value)!)
+        return Image(uiImage: UIImage(named: SC.emptyImage.value)!)
     }
 }

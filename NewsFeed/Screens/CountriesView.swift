@@ -41,11 +41,11 @@ struct CountriesView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image(systemName: "xmark.circle")
+                    Image.close
                         .foregroundColor(.coral)
-                        
+                    
                 }
-
+                
             } //: Toolbar
             .navigationTitle(SC.countries.value)
             .navigationBarTitleDisplayMode(.inline)

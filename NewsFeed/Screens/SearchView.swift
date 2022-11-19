@@ -10,6 +10,8 @@ import SwiftUI
 struct SearchView: View {
     // MARK: - PROPERTIES
     @State var searchText: String = .empty
+    @State var showactionSheet: Bool = false
+    @State var urlString: String = .empty
     @StateObject var viewModel = ViewModel()
     
     // MARK: - BODY
@@ -18,38 +20,62 @@ struct SearchView: View {
             List {
                 ForEach(viewModel.searchNews, id: \.title) { article in
                     HStack {
-                        HeadLineCellView(
-                            imageUrlData: article.urlToImage,
-                            textData: article.title,
-                            descTextData: article.descriptionValue
-                        )
+                        if article.source?.name == nil {
+                            ListNewsView(
+                                textData: article.title,
+                                descTextData: article.descriptionValue
+                            )
+                        } else {
+                            HeadLineCellView(
+                                imageUrlData: article.urlToImage,
+                                textData: article.title,
+                                descTextData: article.descriptionValue
+                            )
+                        }
                         
                     }
                     .padding(4)
+                    .onTapGesture {
+                        showactionSheet.toggle()
+                        urlString = article.url ?? .empty
+                    }
+                    .actionSheet(isPresented: $showactionSheet) {
+                        ActionSheet(
+                            title: Text(SC.titleOpenWeb.value),
+                            buttons: [
+                                .default(Text(SC.openWeb.value), action: {
+                                    viewModel.openUrlWeb(urlString: urlString)
+                                }),
+                                .cancel()
+                                
+                            ]
+                        )
+                    }
                     
                 }
             }
+            .navigationTitle(SC.tabSearch.value)
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
             .onChange(of: searchText, perform: { newValue in
                 viewModel.fetchSearch(keyword: newValue)
             })
-            .navigationTitle(SC.tabSearch.value)
             .onAppear {
-                viewModel.fetchSearch()
+                viewModel.fetchListNews()
             }
             .overlay(Group {
-                if viewModel.topHeadline.isEmpty {
-                    ErrorView(errorMessage: viewModel.errorMessage?.localizedDescription)
-//                    VStack {
-//                        Image.emptyPage
-//                            .resizable()
-//                            .offset(x: 0, y: -50)
-//                            .frame(width: 150, height: 200, alignment: .center)
-//                        Text(viewModel.errorMessage?.localizedDescription ?? .empty)
-//                            .foregroundColor(.coral)
-//                            .multilineTextAlignment(.center)
-//                    }
-//                    .padding()
+                if viewModel.searchNews.isEmpty {
+                    VStack(spacing: 16) {
+                        ErrorViewImage()
+                        Text(SC.errorTitle.value)
+                            .foregroundColor(.textPrimary)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 24, weight: .bold))
+                        Text(viewModel.errorMessage?.localizedDescription ?? .empty)
+                            .foregroundColor(.coral)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding()
                 }
             })
         }

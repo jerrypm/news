@@ -22,9 +22,20 @@ enum StringConstant: String {
     case tabSetting = "Setting"
     
     case countries = "Countries"
+    case darkMode = "Dark Mode"
+    case lightMode = "Light Mode"
+    case version = "Version 1.0.0"
+    case titleOpenWeb = "Open in safari"
+    case openWeb = "Open web"
+    
+    case errorTitle = "Something when wrong"
+    case apperaance = "Apperaance"
+    case info = "Info"
+    case email = "Email"
+    case website = "Website"
     
     //MARK: - Image named
-    case emptyLight = "emptyLight"
+    case emptyImage = "emptyImage"
     
     //MARK: - Image System Name
     case newspaper = "newspaper"
@@ -38,10 +49,13 @@ enum StringConstant: String {
     case jade = "Jade"
     case malibu = "Malibu"
     case coral = "LightCoral"
-
+    case backgroundDefault = "Background Default"
+    case textPrimary = "Text Primary"
     
     //MARK: - Keys
     case onBoardingKey = "onBoarding"
+    case isDarkMode = "isDarkMode"
+    case darkModetext = "darkModetext"
     
     var value: String {
         return rawValue

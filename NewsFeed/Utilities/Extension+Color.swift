@@ -22,6 +22,16 @@ extension Color {
     public static var coral: Color {
         return Color(SC.coral.value)
     }
+    
+    // MARK: Category - Background
+    public static var backgroundDefault: Color {
+        return Color(SC.backgroundDefault.value)
+    }
+    
+    // MARK: Category - Text
+    public static var textPrimary: Color {
+        return Color(SC.textPrimary.value)
+    }
 }
 
 

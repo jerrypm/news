@@ -12,9 +12,12 @@ struct SaveNewsView: View {
     
     // MARK: - BODY
     var body: some View {
-        ZStack {
-            Color.coral
-            Text("Save News")
+        NavigationView {
+            List {
+                Text("text news")
+            }
+            .navigationTitle(SC.tabSave.value)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

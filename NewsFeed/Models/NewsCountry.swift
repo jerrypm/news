@@ -50,6 +50,7 @@ struct Articles:  Codable {
     var content: String?
     var descriptionValue: String?
     var url: String?
+    
 }
 
 struct Source: Codable {

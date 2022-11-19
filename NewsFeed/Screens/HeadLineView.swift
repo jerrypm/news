@@ -13,24 +13,33 @@ struct HeadLineView: View {
     @State var presentingModal = false
     @State var countryID: CountryListType = .us
     
+
     // MARK: - BODY
     var body: some View {
         
         NavigationView {
             List {
-                ForEach(viewModel.topHeadline, id: \.title) { article in
-                    HStack {
-                        HeadLineCellView(
-                            imageUrlData: article.urlToImage,
-                            textData: article.title,
-                            descTextData: article.descriptionValue
-                        )
+                LazyVStack {
+                    ForEach(viewModel.topHeadline, id: \.title) { article in
+                        if article.title == viewModel.firstTopHeadline?.title {
+                            TopHeadLineCellView(imageUrlData: viewModel.firstTopHeadline?.urlToImage)
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            HeadLineCellView(
+                                imageUrlData: article.urlToImage,
+                                textData: article.title,
+                                descTextData: article.descriptionValue
+                            )
+                            .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+                        }
+                        
                     }
-                    .padding(4)
                 }
+                .listRowSeparator(.hidden)
                 
             } //: LIST
             .navigationTitle(SC.tabHeadline.value)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
                     self.presentingModal = true
@@ -43,28 +52,31 @@ struct HeadLineView: View {
                         viewModel.fetchHeadline(country: model)
                     }
                 })
-
-            }
+                
+            } //: Tool Bar
             .overlay(Group {
                 if viewModel.topHeadline.isEmpty {
-                    VStack {
-                        Image.emptyPage
-                            .resizable()
-                            .offset(x: 0, y: -50)
-                            .frame(width: 150, height: 200, alignment: .center)
+                    VStack(spacing: 16) {
+                        ErrorViewImage()
+                        Text(SC.errorTitle.value)
+                            .foregroundColor(.textPrimary)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 24, weight: .bold))
                         Text(viewModel.errorMessage?.localizedDescription ?? .empty)
                             .foregroundColor(.coral)
                             .multilineTextAlignment(.center)
                     }
                     .padding()
                 }
-            })
+            }) //: Overlay
             .onAppear { //: Get Data on this page
                 viewModel.fetchHeadline(country: countryID)
-            }
+            } //: On Appear
             .refreshable { //: pull refresh
                 viewModel.fetchHeadline(country: countryID)
-            }
+            } //: Refresh / Reload
+            .listStyle(PlainListStyle()) //:
+//            .background(Color(UIColor.gray).ignoresSafeArea())
         }
         
     }
@@ -72,7 +84,6 @@ struct HeadLineView: View {
 
 struct HeadLineView_Previews: PreviewProvider {
     static var previews: some View {
-        let extractedExpr = HeadLineView()
-        extractedExpr
+        HeadLineView()
     }
 }

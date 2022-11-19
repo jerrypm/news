@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import TabBar
 
 struct ContentView: View {
     // MARK: - PROPERTIES
     @AppStorage(SC.onBoardingKey.value) var isOnboardingViewActive: Bool = true
-    
+    @AppStorage(SC.isDarkMode.value) private var isDarkMode = true
     // MARK: - INIT
     
     // MARK: - BODY
@@ -43,6 +44,7 @@ struct ContentView: View {
                             Text(SC.tabSetting.value)
                         }
                 }
+                .preferredColorScheme(isDarkMode ? .dark : .light)
                 .accentColor(.coral)
                 
             }//: TAB
