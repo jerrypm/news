@@ -1,5 +1,7 @@
 # NEWS FEED
 
+<img src="https://user-images.githubusercontent.com/15967964/202846989-7db80f3a-aed5-473c-82f6-3b1be2ffce1d.png" alt="drawing" width="200"/> 
+
 This project use free api from https://newsapi.org/ 
 
 ## Feature
